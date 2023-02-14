@@ -1,6 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
+import authRoute from './api/routes/auth.js'
+import hotelsRoute from './api/routes/hotels.js'
+import roomsRoute from './api/routes/rooms.js'
+import usersRoute from './api/routes/users.js'
 dotenv.config();
 
 
@@ -26,6 +30,14 @@ mongoose.connection.on("disconnected", () => {
 app.get('/', (req, res) => {
     res.send('this is the test that the api works')
 })
+
+// api middleware
+app.use(express.json())
+
+app.use("/api/auth", authRoute)
+app.use("/api/users", usersRoute)
+app.use("/api/hotels", hotelsRoute)
+app.use("/api/rooms", roomsRoute)
 
 app.listen(8000, () => {
     connect()
