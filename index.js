@@ -5,6 +5,7 @@ import authRoute from './api/routes/auth.js'
 import hotelsRoute from './api/routes/hotels.js'
 import roomsRoute from './api/routes/rooms.js'
 import usersRoute from './api/routes/users.js'
+import cookieParser from 'cookie-parser';
 dotenv.config();
 
 
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
 })
 
 // api middleware
+app.use(cookieParser())
 app.use(express.json())
 
 app.use("/api/auth", authRoute)
